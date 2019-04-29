@@ -1,0 +1,26 @@
+var told = 0
+
+rule "Waschmaschine fertig"
+when
+        Item WaschmaschineECurrent received update
+then
+        if (WaschmaschineECurrent.state > 0.15 && WaschmaschineECurrent.state < 1.00) {
+                createTimer(now.plusMinutes(1), [|
+                        if ((WaschmaschineECurrent.state < 0.75) && (WaschmaschineECurrent.state > 0) && (told == 0)) {
+                                Echo_AZ_TTS.sendCommand('Die Waschmaschine ist fertig.')
+                                Echo_WZ_TTS.sendCommand('Die Waschmaschine ist fertig.')
+                                Echo_Kueche_TTS.sendCommand('Die Waschmaschine ist fertig.')
+                                told = 1
+                        }
+                ])
+        }
+end
+
+rule "Zähler zurücksetzen"
+when
+        Item WaschmaschineECurrent received update
+then
+        if (WaschmaschineECurrent.state < 0.15) {
+                told = 0
+        }
+end

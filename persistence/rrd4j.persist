@@ -1,0 +1,12 @@
+Strategies {
+        everyMinute : "0 * * * * ?"
+        default = everyChange
+}
+
+Items {
+        WaschmaschineTemp : strategy = everyUpdate, everyMinute, restoreOnStartup
+        LichtWandschrankTemp : strategy = everyUpdate, everyMinute, restoreOnStartup
+
+        WaschmaschineECurrent : strategy = everyUpdate, everyMinute, restoreOnStartup
+        LichtWandschrankECurrent : strategy = everyUpdate, everyMinute, restoreOnStartup
+}

@@ -1,0 +1,13 @@
+rule "Wandschrank Licht an"
+when
+        Item Schrank changed to OPEN
+then
+        LichtWandschrank.sendCommand(ON)
+end
+
+rule "Wandschrank Licht aus"
+when
+        Item Schrank changed to CLOSED
+then
+        LichtWandschrank.sendCommand(OFF)
+end

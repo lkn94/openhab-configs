@@ -1,0 +1,12 @@
+Switch SPower "Stereoanlage Strom" ["Switchable"] { exec=">[ON:/home/pi/Scripts/brennenstuhl.sh 1 4 -t] >[OFF:/home/pi/Scripts/brennenstuhl.sh 1 4 -f ]" }
+Switch SOn "Stereoanlage" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_0] >[OFF:/home/pi/Scripts/irsenderstereo.sh 2 BTN_0]" }
+Switch SMute "Still" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_3] >[OFF:/home/pi/Scripts/itsenderstereo.sh 2 BTN_3]" }
+Switch SVolumeUp1 "Volume Up" { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_2] >[OFF:/home/pi/Scripts/irsenderstereo.sh 2 BTN_1]", autoupdate="false" }
+Switch SVolumeUp10 "Stereoanlage laut" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 15 BTN_2] >[OFF:/home/pi/Scripts/irsenderstereo.sh 15 BTN_1]", autoupdate="false" }
+Switch STV "Eingang TV" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_4]", autoupdate="false" }
+Switch SRadio "Radio" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_5]", autoupdate="false" }
+Switch SBluetooth "Eingang Bluetooth" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_7]", autoupdate="false" }
+Switch SAutoDirect "Auto Direkt" { exec=">[ON:/home/pi/Scripts/irsenderstero.sh 2 BTN_8]", autoupdate="false" }
+Switch SStereo "Stereo"  { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_9]", autoupdate="false" }
+Switch SALCStandart "Standard" { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_A]", autoupdate="false" }
+Switch SADVSurround "Surround" { exec=">[ON:/home/pi/Scripts/irsenderstereo.sh 2 BTN_B]", autoupdate="false" }

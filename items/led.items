@@ -1,0 +1,8 @@
+Switch LED_Strom "LED Strom" ["Lighting"] { exec=">[ON:/home/pi/Scripts/intertechno.sh 123456 0 -t] >[OFF:/home/pi/Scripts/intertechno.sh 123456 0 -f]" }
+Switch LED "LED" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_POWER] >[OFF:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_POWER2]" }
+Switch Weiss "Weiss" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_W]" , autoupdate="false" }
+Switch Blau "Blau" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_BLUE]" , autoupdate="false" }
+Switch Rot "Rot" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_RED]" , autoupdate="false" }
+Switch Orange "Orange" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_O]" , autoupdate="false" }
+Switch Gruen "Grün" ["Lighting"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_GREEN]", autoupdate="false" }
+Switch Heller "Hell" ["Switchable"] { exec=">[ON:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_BRIGHTNESSUP] >[OFF:/home/pi/Scripts/irsender.sh 1 ledband_SZ KEY_BRIGHTNESSDOWN]" }
