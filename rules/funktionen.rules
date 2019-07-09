@@ -1,0 +1,218 @@
+rule "FernsehenON"
+when 
+	Item TV changed to ON
+then
+	sendCommand(Receiver, ON)
+	Thread::sleep(500)
+	sendCommand(FPower, ON)
+	Thread::sleep(10000)
+	sendCommand(FOn, ON)
+end
+rule "FernsehenOFF"
+when
+	Item TV changed to OFF 
+then
+	sendCommand(FOn, OFF)
+	Thread::sleep(10000)
+	sendCommand(FPower, OFF)
+	Thread::sleep(500)
+	sendCommand(Receiver, OFF)
+end
+rule "KinoON"
+when
+	Item Kino changed to ON
+then
+	sendCommand(FPower, ON)
+	Thread::sleep(10000)
+	sendCommand(FOn, ON)
+	Thread::sleep(15000)
+	sendCommand(FMute, ON)
+	Thread::sleep(500)
+	sendCommand(Playstation, ON)
+	Thread::sleep(500)
+	sendCommand(SPower, ON)
+	Thread::sleep(7000)
+	sendCommand(SOn, ON)
+	Thread::sleep(5000)
+	sendCommand(STV, ON)
+	Thread::sleep(5000)
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_2")
+end
+rule "KinoOFF"
+when
+	Item Kino changed to OFF
+then
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_1")
+	Thread::sleep(10000)
+	sendCommand(SOn, OFF)
+	Thread::sleep(5000)
+	sendCommand(SPower, OFF)
+	Thread::sleep(500)
+	sendCommand(Playstation, OFF)
+	Thread::sleep(500)
+	sendCommand(FOn, OFF)
+	Thread::sleep(10000)
+	sendCommand(FPower, OFF)
+end
+rule "PlayerON"
+when
+	Item Musik changed to ON
+then
+	sendCommand(Bluetooth, ON)
+	Thread::sleep(500)
+	sendCommand(SPower, ON)
+	Thread::sleep(7000)
+        sendCommand(SOn, ON)
+	Thread::sleep(5000)
+	sendCommand(SBluetooth, ON)
+	Thread::sleep(5000)
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 25 BTN_2")
+end
+rule "PlayerOFF"
+when
+	Item Musik changed to OFF
+then
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_1")
+	Thread::sleep(10000)
+        sendCommand(SOn, OFF)
+        Thread::sleep(5000)
+        sendCommand(SPower, OFF)
+	Thread::sleep(500)
+	sendCommand(Bluetooth, OFF)
+end
+rule "UnterhaltungON"
+when
+	Item Unterhaltung changed to ON
+then
+        sendCommand(FPower, ON)
+        Thread::sleep(10000)
+        sendCommand(FOn, ON)
+        Thread::sleep(15000)
+        sendCommand(FMute, ON)
+	Thread::sleep(500)
+        sendCommand(Receiver, ON)
+	Thread::sleep(500)
+        sendCommand(SPower, ON)
+        Thread::sleep(7000)
+        sendCommand(SOn, ON)
+        Thread::sleep(5000)
+        sendCommand(STV, ON)
+        Thread::sleep(5000)
+        executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_2")
+end
+rule "UnterhaltungOFF"
+when
+	Item Unterhaltung changed to OFF
+then
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_1")
+        Thread::sleep(10000)
+        sendCommand(SOn, OFF)
+        Thread::sleep(5000)
+        sendCommand(SPower, OFF)
+	Thread::sleep(500)
+        sendCommand(Receiver, OFF)
+	Thread::sleep(500)
+        sendCommand(FOn, OFF)
+        Thread::sleep(10000)
+        sendCommand(FPower, OFF)
+end
+rule "RadioON"
+when
+	Item Rundfunk changed to ON
+then
+	sendCommand(SPower, ON)
+        Thread::sleep(7000)
+        sendCommand(SOn, ON)
+        Thread::sleep(5000)
+        sendCommand(SRadio, ON)
+        Thread::sleep(5000)
+        executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 25 BTN_2")
+end
+rule "RadioOFF"
+when
+	Item Rundfunk changed to OFF
+then
+	executeCommandLine("/home/pi/Scripts/irsenderstereo.sh 30 BTN_1")
+        Thread::sleep(10000)
+        sendCommand(SOn, OFF)
+        Thread::sleep(5000)
+        sendCommand(SPower, OFF)
+end
+rule "ComputerON"
+when
+	Item Computer changed to ON
+then
+	sendCommand(Drucker, ON)
+	Thread::sleep(500)
+	sendCommand(BildschirmMarc, ON)
+	Thread::sleep(500)
+	sendCommand(ComputerMarc, ON)
+end
+rule "ComputerOFF"
+when
+	Item Computer changed to OFF
+then
+	sendCommand(Drucker, OFF)
+	Thread::sleep(500)
+        sendCommand(BildschirmMarc, OFF)
+	Thread::sleep(500)
+        sendCommand(ComputerMarc, OFF)
+end
+rule "SpielenON"
+when
+	Item Spielen changed to ON
+then
+	sendCommand(LautsprecherPC, ON)
+	Thread::sleep(500)
+        sendCommand(BildschirmMarc, ON)
+	Thread::sleep(500)
+        sendCommand(ComputerMarc, ON)
+end
+rule "SpielenOFF"
+when
+	Item Spielen changed to OFF
+then
+	sendCommand(LautsprecherPC, OFF)
+	Thread::sleep(500)
+        sendCommand(BildschirmMarc, OFF)
+	Thread::sleep(500)
+        sendCommand(ComputerMarc, OFF)
+end
+rule "InternetON"
+when
+	Item Internet changed to ON
+then
+	sendCommand(DLAN, ON)
+	sendCommand(BatzisPlatz, ON)
+end
+rule "InternetOFF"
+when
+        Item Internet changed to OFF
+then
+        sendCommand(DLAN, OFF)
+        sendCommand(BatzisPlatz, OFF)
+end
+rule "StaubsaugerON"
+when
+	Time cron "0 00 20 ? * *"
+then
+	sendCommand(Staubsauger, ON)
+end
+rule "StuabsaugerOFF"
+when
+	Time cron "0 00 21 ? * *"
+then
+	sendCommand(Staubsauger, OFF)
+end
+rule "TelefondoseON"
+when
+	Time cron "0 05 20 ? * *"
+then
+	sendCommand(Telefondose, ON)
+end
+rule "TelefondoseOFF"
+when
+	Time cron "0 05 21 ? * *"
+then
+	sendCommand(Telefondose, OFF)
+end

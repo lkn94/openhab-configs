@@ -1,0 +1,3 @@
+String bathShutter "Rollladen Bad" ["Bathroom"] { channel="mqtt:topic:9bf34bcc:rollershutterBath" }
+String bathroomShutter "Rollladen Badezimmer" ["Bathroom", "Blinds"]
+Switch bathlock "Badezimmer sperren" ["Bathroom", "Switch"]

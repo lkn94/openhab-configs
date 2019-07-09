@@ -8,3 +8,7 @@ Do whatever you want!
 There you can find lots of articles. Some of them describe the functionality of these scripts.
 
 https://hobbyblogging.de
+
+# Additional information
+
+Some item files need a rules file. So as you can see in funktionen.items there are only some items triggered. The logic was stored in a rule (funktionen.rules).

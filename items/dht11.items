@@ -1,0 +1,2 @@
+String tmpwhg "Temperatur [%s °C]" (tempLines) [ "CurrentTemperature" ] { exec="<[sudo /home/pi/Scripts/dht11.sh 23 TEMP:180000:REGEX(.?:%s)]" }
+String humwhg "Luftfeuchtigkeit [%s %]" [ "CurrentHumidity" ] { exec="<[sudo /home/pi/Scripts/dht11.sh 23 HUM:180000:REGEX(.?:%s)]" }

@@ -1,0 +1,1 @@
+Switch PilightRestart "Pilight" ["Switchable"] { exec=">[ON:sudo service pilight restart]" }
