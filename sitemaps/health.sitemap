@@ -1,0 +1,8 @@
+sitemap healthcare label="Healthcare" {
+        Frame label="Hilferuf" {
+                Switch item=healthNormal label="Hilfe rufen" icon="warning" mappings=[ON="Hilfe rufen", OFF="Alles ok"]
+        }
+        Frame label="Notruf" {
+                Switch item=healthEmergency label="Notruf" icon="alarm" mappings=[ON="Notruf", OFF="Alles ok"]
+        }
+}
