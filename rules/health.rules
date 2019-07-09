@@ -1,0 +1,21 @@
+rule "Health normal"
+when
+        Item healthNormal changed to ON
+then
+        Echo_AZ_TTS.sendCommand('Hilfe wird gebraucht.')
+        Echo_WZ_TTS.sendCommand('Hilfe wird gebraucht.')
+        Echo_Kueche_TTS.sendCommand('Hilfe wird gebraucht.')
+	sendBroadcastNotification('Hilfe wird gebraucht.')
+        healthNormal.sendCommand(OFF)
+end
+
+rule "Health emergency"
+when
+        Item healthEmergency changed to ON
+then
+        Echo_AZ_TTS.sendCommand('Notruf Hilfe')
+        Echo_WZ_TTS.sendCommand('Notruf Hilfe')
+        Echo_Kueche_TTS.sendCommand('Notruf Hilfe')
+        sendMail('abc@def.com', 'Notruf', 'Notruf wird benötigt.')
+        healthEmergency.sendCommand(OFF)
+end

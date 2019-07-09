@@ -1,0 +1,65 @@
+rule "Rollladen Bad"
+when
+	Item bathroomShutter changed
+then
+	if (bathroomShutter.state == 'UP' && bathlock.state == OFF && FensterBad.state == CLOSED) {
+		bathShutter.sendCommand('UP')
+	} else if (bathroomShutter.state == 'STOP') {
+		bathShutter.sendCommand('STOP')
+	} else if (bathroomShutter.state == 'DOWN' && bathlock.state == OFF && FensterBad.state == CLOSED) {
+		bathShutter.sendCommand('DOWN')
+	} else {
+		Echo_AZ_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
+        Echo_WZ_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
+	    Echo_Kueche_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
+	}
+end
+
+rule "Badfenster Rollladen schließen"
+when
+        Channel "astro:sun:68128013:set#event" triggered START
+then
+	createTimer(now.plusMinutes(30), [|
+		if (FensterBad_LowBattery.state == OFF && FensterBad.state == CLOSED && bathlock.state == OFF) {
+			bathShutter.sendCommand('DOWN')
+		}
+		else {
+			Echo_AZ_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
+        	Echo_WZ_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
+	        Echo_Kueche_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
+		}
+	])
+end
+
+rule "Rollladen Bad sperren/freigeben"
+when
+	Item FensterBad changed
+then
+	if (FensterBad.state == OPEN) {
+		bathlock.sendCommand(ON)
+	}
+	else if (FensterBad.state == CLOSED) {
+		bathlock.sendCommand(OFF)
+	}
+end
+
+rule "Rollladen Bad sperren/freigeben"
+when
+	Item FensterBad_LowBattery changed
+then
+	if (FensterBad_LowBattery.state == ON) {
+		bathlock.sendCommand(ON)
+	}
+	else if (FensterBad_LowBattery.state == OFF) {
+		bathlock.sendCommand(OFF)
+	}
+end
+
+rule "Rollladen automatisch öffen"
+when
+	Channel "astro:sun:68128013:rise#event" triggered Start
+then
+	if (FensterBad_LowBattery.state == OFF && FensterBad.state == CLOSED && bathlock.state == OFF) {
+		bathShutter.sendCommand('UP')
+	}
+end
