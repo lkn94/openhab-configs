@@ -12,6 +12,7 @@ then
 		Echo_AZ_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
         Echo_WZ_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
 	    Echo_Kueche_TTS.sendCommand('Der Rollladen im Bad ist gesperrt.')
+		sendBroadcastNotification('Der Rollladen im Bad ist gesperrt.')
 	}
 end
 
@@ -27,11 +28,12 @@ then
 			Echo_AZ_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
         	Echo_WZ_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
 	        Echo_Kueche_TTS.sendCommand('Der Rollladen im Bad konnte nicht geschlossen werden.')
+			sendBroadcastNotification('Der Rollladen im Bad konnte nicht geschlossen werden.')
 		}
 	])
 end
 
-rule "Rollladen Bad sperren/freigeben"
+rule "Rollladen Bad sperren/freigeben Fenster offen"
 when
 	Item FensterBad changed
 then
@@ -43,7 +45,7 @@ then
 	}
 end
 
-rule "Rollladen Bad sperren/freigeben"
+rule "Rollladen Bad sperren/freigeben Batterie"
 when
 	Item FensterBad_LowBattery changed
 then
@@ -52,14 +54,17 @@ then
 	}
 	else if (FensterBad_LowBattery.state == OFF) {
 		bathlock.sendCommand(OFF)
+		sendBroadcastNotification('Batterie im Bad fast leer.')
 	}
 end
 
 rule "Rollladen automatisch öffen"
 when
-	Channel "astro:sun:68128013:rise#event" triggered Start
+	Channel "astro:sun:68128013:rise#event" triggered START
 then
 	if (FensterBad_LowBattery.state == OFF && FensterBad.state == CLOSED && bathlock.state == OFF) {
 		bathShutter.sendCommand('UP')
+	} else {
+		sendBroadcastNotification('Der Rollladen kann nicht geöffnet werden.')
 	}
 end
