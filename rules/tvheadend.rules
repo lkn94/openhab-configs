@@ -1,0 +1,14 @@
+rule "TVHeadend updated"
+when
+    Item GridUpcoming received update or
+    Item GridUpcoming changed
+then
+    val nextRec = transform("JSONPATH", "$.entries[0].start_real", GridUpcoming.state.toString)
+    NextRecord.postUpdate(nextRec)
+    val nextTitle = transform("JSONPATH", "$.entries[0].title.ger", GridUpcoming.state.toString)
+    NextRecordTitle.postUpdate(nextTitle)
+    val nextRecStatus = transform("JSONPATH", "$.entries[0].status", GridUpcoming.state.toString)
+    NextRecordStatus.postUpdate(nextRecStatus)
+    val nextRecComment = transform("JSONPATH", "$.entries[0].comment", GridUpcoming.state.toString)
+    NextRecordComment.postUpdate(nextRecComment)
+end

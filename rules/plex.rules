@@ -1,0 +1,41 @@
+rule "Kinomodus Lichter ein"
+when
+    Item Plex_Playstation_State changed
+then
+    if (Kinomodus.state == ON && (Plex_Playstation_State.state == "media.stop" || Plex_Playstation_State.state == "media.pause")) {
+        Wohnzimmer_Light_Brightness.sendCommand(50)
+    }
+end
+
+rule "Kinomodus Lichter aus"
+when
+    Item Plex_Playstation_State changed
+then
+    if (Kinomodus.state == ON) {
+        if (Plex_Playstation_State.state == "media.play" || Plex_Playstation_State.state == "media.resume") {
+            Wohnzimmer_Light_Switch.sendCommand(OFF)
+        }
+    }
+end
+
+rule "Alexa Ankündigung Beginn"
+when
+    Item Plex_Playstation_Title changed
+then
+    if (Kinomodus.state == ON) {
+        if (Plex_Playstation_State.state == "media.play") {
+            Echo_WZ_TTS.sendCommand("Jetzt beginnt " + Plex_Playstation_Title.state)
+        }
+    }
+end
+
+rule "Alexa Ankündigung nach Pause"
+when
+    Item Plex_Playstation_State changed
+then
+    if (Kinomodus.state == ON) {
+        if (Plex_Playstation_State.state == "media.resume") {
+            Echo_WZ_TTS.sendCommand("Die Wiedergabe wird fortgesetzt.")
+        }
+    }
+end

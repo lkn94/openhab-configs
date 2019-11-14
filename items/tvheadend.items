@@ -1,0 +1,6 @@
+String GridUpcoming "[%s]" { http="<[tvheadend:350000:JSONPATH($.)]" }
+String NextRecord "Nächste Aufnahme [JS(TimeFormatWithDay.js):%s]"
+String NextRecordTitle "Titel"
+String NextRecordStatus "Status"
+String NextRecordComment "Kommentar"
+String CurrentConnections "Aktuelle Verbindungen [%s]" { http="<[tvhSubscriptions:110000:JSONPATH($.totalCount)]" }
